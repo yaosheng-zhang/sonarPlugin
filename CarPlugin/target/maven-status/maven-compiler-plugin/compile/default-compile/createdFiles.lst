@@ -1,8 +1,0 @@
-com\zhangys\carplugin\Entity\Result.class
-com\zhangys\carplugin\Utils\CppMethodExtractor.class
-com\zhangys\carplugin\CarPluginApplication.class
-com\zhangys\carplugin\Controller\IssueController.class
-com\zhangys\carplugin\Utils\Generator.class
-com\zhangys\carplugin\Utils\LogUtils.class
-com\zhangys\carplugin\Entity\Error.class
-com\zhangys\carplugin\ServletInitializer.class

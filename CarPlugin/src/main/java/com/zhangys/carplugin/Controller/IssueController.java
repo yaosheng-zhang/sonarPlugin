@@ -1,7 +1,7 @@
 package com.zhangys.carplugin.Controller;
 
 
-import com.zhangys.carplugin.Entity.CodeLine;
+
 import com.zhangys.carplugin.Entity.Issue;
 import com.zhangys.carplugin.Service.IssueService;
 import io.swagger.annotations.Api;
@@ -24,7 +24,7 @@ public class IssueController {
 
     @PostMapping (value = "/fix",consumes = "application/json")
     @ApiOperation(value = "获取修复信息")
-    public List<CodeLine> fixIssue(@RequestBody Issue issue) throws FileNotFoundException {
+    public String  fixIssue(@RequestBody Issue issue) throws FileNotFoundException {
         return issueService.fixByGpt(issue);
     }
 

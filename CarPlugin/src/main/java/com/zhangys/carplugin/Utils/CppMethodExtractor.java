@@ -13,6 +13,7 @@ import java.util.regex.Pattern;
 
 public class CppMethodExtractor {
 
+
     public static String extracted(String filePath, Issue issue) throws FileNotFoundException {
 
         Integer lineNumber = issue.getLine();
@@ -114,11 +115,11 @@ public class CppMethodExtractor {
 
         // If the method start and end are found
         if (methodStart >= 0 && methodEnd >= 0) {
-            issue.setLine(lineNumber-methodStart+1);
+            issue.setLine(lineNumber-methodStart);
             return lines.subList(methodStart, methodEnd + 1);
         } else {
             // Otherwise, return an empty list
-            issue.setLine(lineNumber-methodStart+1);
+            issue.setLine(lineNumber-methodStart);
             return new ArrayList<>();
         }
     }

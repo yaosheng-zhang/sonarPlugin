@@ -15,6 +15,9 @@ import java.io.Serializable;
 @AllArgsConstructor
 @ApiModel(value = "通用PI接口返回", description = "Common Api Response")
 public class Issue implements Serializable {
+    @ApiModelProperty(value = "问题id",required = true)
+    private String id;
+
     @ApiModelProperty(value = "路径", required = true)
     private String path;
     @ApiModelProperty(value = "错误行数", required = true)

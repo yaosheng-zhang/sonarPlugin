@@ -4,3 +4,13 @@ spring:
   profiles:
     #    active: release
     active: dev
+  datasource:
+    url: jdbc:postgresql://192.168.3.13:5432/sonarPlugin
+    username: postgres
+    password: cquissE!
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    show-sql: true # 打印 SQL 。生产环境，建议关闭
+    # Hibernate 配置内容，对应 HibernateProperties 类
+    hibernate:
+      ddl-auto: none

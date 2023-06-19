@@ -1,32 +1,74 @@
 package com.zhangys.carplugin.Service;
 
-import com.zhangys.carplugin.Entity.CodeLine;
+import com.zhangys.carplugin.Entity.FixRecords;
 import com.zhangys.carplugin.Entity.Issue;
 import com.zhangys.carplugin.Utils.CppMethodExtractor;
+import com.zhangys.carplugin.Utils.DiffHandleUtils;
 import com.zhangys.carplugin.Utils.Generator;
+import com.zhangys.carplugin.repository.IssueRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.aspectj.apache.bcel.classfile.Code;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
+import java.time.LocalDate;
+
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 
 @Slf4j
 @Component
 public class IssueService {
+
+    @Resource
+    private IssueRepository issueRepository;
     private final static String BASIC_PATH="/data/jenkins_home/workspace/";
-    public List<CodeLine> fixByGpt(Issue issue) throws FileNotFoundException {
+
+    public String fixByGpt(Issue issue) throws FileNotFoundException {
+        String id = issue.getId();
+        boolean isExistIssue = issueRepository.existsById(id);
+        String content = "";
+        if (isExistIssue)
+        {
+            FixRecords fixRecords = issueRepository.findById(id).orElse(null);
+            content = fixRecords.getDiffCode();
+            return content;
+        }
+
         String adr = dealPath(issue.getPath());
-        String content = CppMethodExtractor.extracted(adr,issue);
+        content = CppMethodExtractor.extracted(adr,issue);
         System.out.println(content);
         String res = settleSmell(content, issue);
-        List<CodeLine> codeLines = splitString(content,res);
-        return codeLines;
+        String diffCode= getStringBuilder(content, res);
 
+
+        //修复后的结果持久化到数据库中
+        LocalDate now = LocalDate.now();
+        issueRepository.save(new FixRecords(id,content,res,diffCode,now));
+
+
+        return diffCode;
+
+    }
+
+    private static String getStringBuilder(String content, String res) {
+        List<String> contentList = toList(content);
+        List<String> resList = toList(res);
+        List<String> diffString = DiffHandleUtils.diffString(contentList,resList);
+        StringBuilder builder = new StringBuilder();
+        for (String line : diffString) {
+            builder.append(line);
+            builder.append("\n");
+        }
+        return builder.toString();
+    }
+
+    private static List<String> toList(String res) {
+        String[] split = res.split("\n");
+        List<String> resList = Arrays.asList(split);
+        return resList;
     }
 //    public Error getIssue(Issue issue) {
 //        String adr = dealPath(issue.getPath());
@@ -87,39 +129,39 @@ public class IssueService {
             return prompt;
         }
 
-    /**
-     * 结果处理函数
-     *
-     * @param content
-     * @param res
-     * @return
-     */
-    public static List<CodeLine> splitString(String content, String res) {
-        List<CodeLine> sources = new ArrayList<>();
-        List<String> contentList = Arrays.asList(content.split("\n"));
-        List<String> collect = contentList.stream().map(x -> x.replaceAll(" ", "")).collect(Collectors.toList());
-
-
-
-        List<String> resList = Arrays.asList(res.split("\\n"));
-
-
-
-        // 遍历每行数据，将其存储到 HashMap 中
-        for (int i = 0; i < resList.size(); i++) {
-            String line = resList.get(i);
-            String s = line.replaceAll(" ", "");
-            Boolean isRefactor=false;
-            if (!collect.contains(s))
-            {
-                isRefactor=true;
-            }
-            CodeLine codeLine = new CodeLine(i,resList.get(i),isRefactor);
-            sources.add(codeLine);
-        }
-        return sources;
-
-    }
+//    /**
+//     * 结果处理函数
+//     *
+//     * @param content
+//     * @param res
+//     * @return
+//     */
+//    public static List<CodeLine> splitString(String content, String res) {
+//        List<CodeLine> sources = new ArrayList<>();
+//        List<String> contentList = Arrays.asList(content.split("\n"));
+//        List<String> collect = contentList.stream().map(x -> x.replaceAll(" ", "")).collect(Collectors.toList());
+//
+//
+//
+//        List<String> resList = Arrays.asList(res.split("\\n"));
+//
+//
+//
+//        // 遍历每行数据，将其存储到 HashMap 中
+//        for (int i = 0; i < resList.size(); i++) {
+//            String line = resList.get(i);
+//            String s = line.replaceAll(" ", "");
+//            Boolean isRefactor=false;
+//            if (!collect.contains(s))
+//            {
+//                isRefactor=true;
+//            }
+//            CodeLine codeLine = new CodeLine(i,resList.get(i),isRefactor);
+//            sources.add(codeLine);
+//        }
+//        return sources;
+//
+//    }
 
 
 
