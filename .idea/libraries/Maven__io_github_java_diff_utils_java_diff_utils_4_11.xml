@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="Maven: io.github.java-diff-utils:java-diff-utils:4.11">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../tools/repository/io/github/java-diff-utils/java-diff-utils/4.11/java-diff-utils-4.11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../tools/repository/io/github/java-diff-utils/java-diff-utils/4.11/java-diff-utils-4.11.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$PROJECT_DIR$/../../tools/repository/io/github/java-diff-utils/java-diff-utils/4.11/java-diff-utils-4.11-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../tools/repository/io/github/java-diff-utils/java-diff-utils/4.11/java-diff-utils-4.11-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/../../tools/repository/io/github/java-diff-utils/java-diff-utils/4.11/java-diff-utils-4.11-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../tools/repository/io/github/java-diff-utils/java-diff-utils/4.11/java-diff-utils-4.11-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

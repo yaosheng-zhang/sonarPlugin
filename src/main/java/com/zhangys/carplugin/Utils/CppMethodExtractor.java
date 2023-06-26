@@ -1,28 +1,36 @@
 package com.zhangys.carplugin.Utils;
 
 import com.zhangys.carplugin.Entity.Issue;
+import io.swagger.models.auth.In;
+import lombok.Data;
+import org.springframework.util.CollectionUtils;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@Data
 public class CppMethodExtractor {
 
+    private  Integer methodStart =-1;
+    private  Integer methodEnd =-1;
 
-    public static String extracted(String filePath, Issue issue) throws FileNotFoundException {
 
-        Integer lineNumber = issue.getLine();
+    public  String extracted(String filePath, Integer lineNumber) throws FileNotFoundException {
+
         StringBuilder context=new StringBuilder();
         List<String> lines = new ArrayList<>();
 
         try {
             lines = readCppFile(filePath);
-            List<String> methodLines = extractMethod(lines, issue);
+            List<String> methodLines = extractMethod(lines, lineNumber);
 
 
 
@@ -45,7 +53,7 @@ public class CppMethodExtractor {
         return context.toString();
     }
 
-    private static List<String> readCppFile(String filePath) throws IOException {
+    public   List<String> readCppFile(String filePath) throws IOException {
         List<String> lines = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
@@ -56,11 +64,9 @@ public class CppMethodExtractor {
         return lines;
     }
 
-    private static List<String> extractMethod(List<String> lines, Issue issue) {
-        Integer lineNumber = issue.getLine();
-        // Initialize variables to store the start and end of the method
-        int methodStart = -1;
-        int methodEnd = -1;
+    private  List<String> extractMethod(List<String> lines, Integer lineNumber) {
+
+
         // Initialize the number of braces to 0
         int braceCount = 0;
         // Create a pattern to find the start of a method
@@ -115,11 +121,9 @@ public class CppMethodExtractor {
 
         // If the method start and end are found
         if (methodStart >= 0 && methodEnd >= 0) {
-            issue.setLine(lineNumber-methodStart);
             return lines.subList(methodStart, methodEnd + 1);
         } else {
             // Otherwise, return an empty list
-            issue.setLine(lineNumber-methodStart);
             return new ArrayList<>();
         }
     }
@@ -136,11 +140,11 @@ public class CppMethodExtractor {
         return count;
     }
 
-    private static int findMethodEnd(List<String> lines, int startLine, int braceCount) {
+    private  int findMethodEnd(List<String> lines, int startLine, int braceCount) {
 
         for (int i = startLine; i < lines.size(); i++) {
             String line = lines.get(i);
-            if (countBraces(line)==0)
+            if (!(line.contains("{")||line.contains("}")))
             {
                 continue;
             }
@@ -150,5 +154,23 @@ public class CppMethodExtractor {
             }
         }
         return -1;
+    }
+
+    public   String getAcode(String path , Integer line) throws IOException {
+        List<String> list = readCppFile(path);
+        String s = list.get(line - 1);
+        return s;
+    }
+
+    public Integer realLine(String content , String code ) throws Exception {
+        String[] split = content.split("\n");
+        ArrayList<String> list = new ArrayList<>(Arrays.asList(split));
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).equals(code))
+            {
+                return i+1;
+            }
+        }
+        throw new Exception("Code not found in list");
     }
 }

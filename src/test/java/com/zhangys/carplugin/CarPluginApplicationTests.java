@@ -2,10 +2,14 @@ package com.zhangys.carplugin;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zhangys.carplugin.Entity.FixRecords;
+import com.zhangys.carplugin.Entity.Issue;
+import com.zhangys.carplugin.Service.IssueService;
 import com.zhangys.carplugin.Service.RestTemplateToInterface;
 import com.zhangys.carplugin.Utils.CppMethodExtractor;
 import com.zhangys.carplugin.Utils.DiffHandleUtils;
+import com.zhangys.carplugin.Utils.Generator;
 import com.zhangys.carplugin.repository.IssueRepository;
+import io.swagger.models.auth.In;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,8 +28,45 @@ import java.util.List;
 class CarPluginApplicationTests {
 
 
+            @Test
+            void testGPT(){
+                Generator generator = new Generator();
+                String content ="static void misra_2_2(int x) {\n" +
+                        "    int a;\n" +
+                        "    a = x + 0; // 2.2\n" +
+                        "    a = 0 + x; // 2.2\n" +
+                        "    a = x * 0; // 2.2\n" +
+                        "    a = 0 * x; // 2.2\n" +
+                        "    a = x * 1; // 2.2\n" +
+                        "    a = 1 * x; // 2.2\n" +
+                        "    a = MISRA_2_2;\n" +
+                        "    (void)a;\n" +
+                        "}";
+
+                //认不到代码行数
+                Integer line = 5;
+                String msg = "Rule Required 2.2: There shall be no dead code.";
+                String prompt = "你的任务是根据MISRA的要求和规范对下面代码中指定代码行进行重构，若满足规范则直接返回\n代码如下：\n"+content+"\n"
+                        +"出现问题的行数为："+line+"\t   a = x * 0; "+"\n违反的Misra规则为:"+msg+
+                        "\n只需要重构给定代码的第"+line+"行代码并且返回重构后的整体代码，非代码部分必须以JAVA注释 // 的方式出现"
+                        ;
+                System.out.println(prompt);
+                String codeFromModle = generator.getCodeFromModle(prompt);
+                System.out.println(codeFromModle);
+            }
+            @Resource
+    IssueService issueService;
+
+            @Test
+            void testPrompt(){
+                String path = "D:\\project\\新建文件夹\\CarPlugin\\src\\test\\java\\file\\test.c";
+                Integer line = 103;
+                String msg = "Rule Advisory 2.7: There should be no unused parameters in functions.";
+                Issue issue = new Issue("1", path, line, msg);
 
 
+
+            }
 
 
 }

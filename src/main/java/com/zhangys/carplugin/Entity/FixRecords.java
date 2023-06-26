@@ -31,6 +31,12 @@ public class FixRecords {
     @Column(name = "diff_code", nullable = false)
     private  String diffCode;
 
+    @Column(name = "project_name", nullable = false)
+    private  String projectName;
+
+    @Column(name = "message", nullable = false)
+    private  String message;
+
 
     @Column(name = "create_time", nullable = false)
     private LocalDate createTime;
