@@ -1,34 +1,20 @@
 package com.zhangys.carplugin;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.difflib.DiffUtils;
 import com.github.difflib.algorithm.DiffAlgorithmListener;
 import com.github.difflib.patch.AbstractDelta;
 import com.github.difflib.patch.Patch;
-import com.zhangys.carplugin.Entity.FixRecords;
 import com.zhangys.carplugin.Entity.Issue;
 import com.zhangys.carplugin.Service.IssueService;
-import com.zhangys.carplugin.Service.RestTemplateToInterface;
-import com.zhangys.carplugin.Utils.CppMethodExtractor;
-import com.zhangys.carplugin.Utils.DiffHandleUtils;
 import com.zhangys.carplugin.Utils.Generator;
-import com.zhangys.carplugin.repository.IssueRepository;
-import io.swagger.models.auth.In;
-import org.assertj.core.util.diff.Delta;
+import com.zhangys.carplugin.repository.ApiKeysRepository;
 import org.assertj.core.util.diff.DiffAlgorithm;
 import org.assertj.core.util.diff.myers.MyersDiff;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.*;
-import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
-import java.io.UnsupportedEncodingException;
-import java.nio.charset.StandardCharsets;
-import java.time.LocalDate;
 import java.util.Arrays;
-import java.util.Base64;
 import java.util.List;
 
 @SpringBootTest
@@ -58,7 +44,7 @@ class CarPluginApplicationTests {
                         "\n只需要重构给定代码的第"+line+"行代码并且返回重构后的整体代码，非代码部分必须以JAVA注释 // 的方式出现"
                         ;
                 System.out.println(prompt);
-                String codeFromModle = generator.getCodeFromModle(prompt);
+                String codeFromModle = generator.getCodeFromModle(prompt, apiLists);
                 System.out.println(codeFromModle);
             }
             @Resource
@@ -100,5 +86,16 @@ class CarPluginApplicationTests {
                     System.out.println(delta);
                 }
             }
+
+    @Resource
+    ApiKeysRepository apiKeysRepository;
+         @Test
+         void  getAPikeys()
+         {
+
+             List<String> allKeys = apiKeysRepository.findAllKeys();
+             System.out.println(allKeys);
+
+         }
 
 }

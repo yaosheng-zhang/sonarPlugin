@@ -4,8 +4,10 @@ import com.google.gson.Gson;
 import com.zhangys.carplugin.Entity.Confidence;
 import com.zhangys.carplugin.Entity.Issue;
 import com.zhangys.carplugin.Utils.Generator;
+import com.zhangys.carplugin.repository.ApiKeysRepository;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -19,6 +21,9 @@ public class ConfidenceService {
 
     private final static String BASIC_PATH = "/data/jenkins_home/workspace/";
 
+    @Resource
+    ApiKeysRepository apiKeysRepository;
+
     public Confidence getConfidenceService(Issue issue) throws FileNotFoundException {
         String adr = dealPath(issue.getPath());
         String line = extracted(adr, issue);
@@ -27,8 +32,10 @@ public class ConfidenceService {
         map.put("code", line);
         map.put("msg", issue.getMsg());
         String s1 = map.toString();
+        List<String> apiLists = apiKeysRepository.findAllKeys();
+
         Generator generator = new Generator();
-        String confidenceFromModle = generator.getConfidenceFromModle(s1);
+        String confidenceFromModle = generator.getConfidenceFromModle(s1,apiLists);
         Gson gson = new Gson();
         Confidence jsonObject = gson.fromJson(confidenceFromModle, Confidence.class);
         String jsonResult = gson.toJson(jsonObject);

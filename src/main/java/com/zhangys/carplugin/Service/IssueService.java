@@ -4,6 +4,7 @@ import com.zhangys.carplugin.Entity.Issue;
 import com.zhangys.carplugin.Utils.CppMethodExtractor;
 import com.zhangys.carplugin.Utils.DiffHandleUtils;
 import com.zhangys.carplugin.Utils.Generator;
+import com.zhangys.carplugin.repository.ApiKeysRepository;
 import com.zhangys.carplugin.repository.IssueRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.dom4j.Document;
@@ -22,8 +23,7 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.zhangys.carplugin.Entity.Constant.FIX_BASIS_ADR;
-import static com.zhangys.carplugin.Entity.Constant.JUDGE_BASIS_ADR;
+import static com.zhangys.carplugin.Entity.Constant.*;
 
 
 @Slf4j
@@ -34,8 +34,6 @@ public class IssueService {
     private IssueRepository issueRepository;
 
     public String fixByGpt(Issue issue) throws Exception {
-
-
 
 
         //真实路径
@@ -112,24 +110,26 @@ public class IssueService {
     {
         String projectName = path.substring(0, path.indexOf(':'));
         String  fileName= path.substring(path.indexOf(':')+1);
-        String adr = FIX_BASIS_ADR+projectName+'/'+fileName;
-//        String adr = BASIC_PATH+fileName;
+//        String adr = FIX_BASIS_ADR+projectName+'/'+fileName;
+        String adr = FIX_BASIS_DEV_ADR+fileName;
         System.out.println(adr);
         return adr;
     }
 
+    @Resource
+    private ApiKeysRepository apiKeysRepository;
     /**
      * 异味重构
      *
      */
-    public static String settleSmell(String prompt) {
+    public  String settleSmell(String prompt) {
 
 
         //2.通过模型得到重构的回答
         Generator generator = new Generator();
-
+        List<String> apiLists = apiKeysRepository.findAllKeys();
         System.out.println(prompt);
-        String codeFromModle = generator.getCodeFromModle(prompt);
+        String codeFromModle = generator.getCodeFromModle(prompt,apiLists);
         System.out.println(codeFromModle);
         return codeFromModle;
     }
