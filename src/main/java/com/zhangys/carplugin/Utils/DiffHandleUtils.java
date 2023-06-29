@@ -1,7 +1,9 @@
 package com.zhangys.carplugin.Utils;
 
 
+import com.github.difflib.DiffUtils;
 import com.github.difflib.UnifiedDiffUtils;
+import com.github.difflib.algorithm.DiffAlgorithmFactory;
 import com.github.difflib.patch.Patch;
 
 import java.io.BufferedWriter;
@@ -53,6 +55,7 @@ public class DiffHandleUtils {
             unifiedDiff.set(1, unifiedDiff.get(1));
             //如果第一行没变化则插入@@ -0,0 +0,0 @@
             unifiedDiff.add(2, "@@ -0,0 +0,0 @@");
+
         }
         //原始文件中每行前加空格
         List<String> original1 = original.stream().map(v -> " " + v).collect(Collectors.toList());

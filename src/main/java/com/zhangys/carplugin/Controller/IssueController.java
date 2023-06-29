@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 
@@ -34,6 +35,13 @@ public class IssueController {
         return issueService.fixByGpt(issue);
     }
 
+    @GetMapping(value = "/judge")
+    @ApiOperation(value = "评估重估结果")
+    @CrossOrigin(origins = "*",allowedHeaders = "*")
+    public boolean judgeInfo(@RequestParam String id) throws IOException, InterruptedException {
+        System.out.println(id);
+        return issueService.getJudgeInfo(id);
+    }
 
 //    @PostMapping(value = "/info",consumes = "application/json")
 //    @ApiOperation(value = "获取问题类别")

@@ -1,6 +1,10 @@
 package com.zhangys.carplugin;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.difflib.DiffUtils;
+import com.github.difflib.algorithm.DiffAlgorithmListener;
+import com.github.difflib.patch.AbstractDelta;
+import com.github.difflib.patch.Patch;
 import com.zhangys.carplugin.Entity.FixRecords;
 import com.zhangys.carplugin.Entity.Issue;
 import com.zhangys.carplugin.Service.IssueService;
@@ -10,6 +14,9 @@ import com.zhangys.carplugin.Utils.DiffHandleUtils;
 import com.zhangys.carplugin.Utils.Generator;
 import com.zhangys.carplugin.repository.IssueRepository;
 import io.swagger.models.auth.In;
+import org.assertj.core.util.diff.Delta;
+import org.assertj.core.util.diff.DiffAlgorithm;
+import org.assertj.core.util.diff.myers.MyersDiff;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -68,5 +75,30 @@ class CarPluginApplicationTests {
 
             }
 
+            @Test
+            void diff(){
+                String text1 = "This is some text.";
+                String text2 = "This is some    text.";
+
+                // 去除文本中的空格
+                text1 = text1.replaceAll("\\s+", "");
+                text2 = text2.replaceAll("\\s+", "");
+
+                // 将文本转换为行列表
+                List<String> lines1 = Arrays.asList(text1.split("\n"));
+                List<String> lines2 = Arrays.asList(text2.split("\n"));
+
+
+                // 使用Myers算法创建diff算法
+                DiffAlgorithm diffAlgorithm = new MyersDiff();
+
+                // 获取差异
+                Patch<String> patch = DiffUtils.diff(lines1, lines2, (DiffAlgorithmListener) diffAlgorithm);
+
+                // 输出差异
+                for (AbstractDelta<String> delta : patch.getDeltas()) {
+                    System.out.println(delta);
+                }
+            }
 
 }

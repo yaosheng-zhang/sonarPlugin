@@ -1,5 +1,4 @@
 package com.zhangys.carplugin.Service;
-
 import com.zhangys.carplugin.Entity.FixRecords;
 import com.zhangys.carplugin.Entity.Issue;
 import com.zhangys.carplugin.Utils.CppMethodExtractor;
@@ -7,26 +6,32 @@ import com.zhangys.carplugin.Utils.DiffHandleUtils;
 import com.zhangys.carplugin.Utils.Generator;
 import com.zhangys.carplugin.repository.IssueRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.io.FileNotFoundException;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.zhangys.carplugin.Entity.Constant.FIX_BASIS_ADR;
+import static com.zhangys.carplugin.Entity.Constant.JUDGE_BASIS_ADR;
 
 
 @Slf4j
-@Component
+@Service
 public class IssueService {
 
     @Resource
     private IssueRepository issueRepository;
-    private final static String BASIC_PATH="/data/jenkins_home/workspace/";
-//    private final static String BASIC_PATH="D:\\project\\新建文件夹\\CarPlugin\\src\\test\\java\\file\\";
 
     public String fixByGpt(Issue issue) throws Exception {
 
@@ -107,7 +112,7 @@ public class IssueService {
     {
         String projectName = path.substring(0, path.indexOf(':'));
         String  fileName= path.substring(path.indexOf(':')+1);
-        String adr = BASIC_PATH+projectName+'/'+fileName;
+        String adr = FIX_BASIS_ADR+projectName+'/'+fileName;
 //        String adr = BASIC_PATH+fileName;
         System.out.println(adr);
         return adr;
@@ -159,40 +164,75 @@ public class IssueService {
         return code;
     }
 
+    public boolean getJudgeInfo(String id) throws InterruptedException, IOException {
+        FixRecords byId = issueRepository.findById(id).orElse(null);
+        String message = byId.getMessage();
+        String postCode = byId.getPostCode();
+        String adr = JUDGE_BASIS_ADR + "tem.c";
+        File file = new File(adr);
+        PrintStream printStream = new PrintStream(file);
 
-//    /**
-//     * 结果处理函数
-//     *
-//     * @param content
-//     * @param res
-//     * @return
-//     */
-//    public static List<CodeLine> splitString(String content, String res) {
-//        List<CodeLine> sources = new ArrayList<>();
-//        List<String> contentList = Arrays.asList(content.split("\n"));
-//        List<String> collect = contentList.stream().map(x -> x.replaceAll(" ", "")).collect(Collectors.toList());
-//
-//
-//
-//        List<String> resList = Arrays.asList(res.split("\\n"));
-//
-//
-//
-//        // 遍历每行数据，将其存储到 HashMap 中
-//        for (int i = 0; i < resList.size(); i++) {
-//            String line = resList.get(i);
-//            String s = line.replaceAll(" ", "");
-//            Boolean isRefactor=false;
-//            if (!collect.contains(s))
-//            {
-//                isRefactor=true;
-//            }
-//            CodeLine codeLine = new CodeLine(i,resList.get(i),isRefactor);
-//            sources.add(codeLine);
-//        }
-//        return sources;
-//
-//    }
+        printStream.print(postCode);
+        printStream.close();
+
+
+        String command = "sudo sh /home/ngtl/jar/tem/cppcheck_start.sh";
+        Process process = Runtime.getRuntime().exec(command);
+        int i = process.waitFor();
+//        String command = "cppcheck --rule=misra_c --addon=\"/usr/share/cppcheck/addons/misra.json\" -j 8 --xml --xml-version=2 \""+adr+"\" 2> "+JUDGE_BASIS_ADR+"cppcheck-result.xml";
+        System.out.println("Command"+command + i);
+
+
+        String cpp_check_xml=JUDGE_BASIS_ADR+"cppcheck-result.xml";
+        Path path = Paths.get(cpp_check_xml);
+
+        int maxTries = 10;
+        int tries = 0;
+        final int second = 1000;
+        while (!Files.exists(path) && tries < maxTries) {
+            Thread.sleep(second); // 等待1秒:
+            tries++;
+        }
+
+        boolean flag=false;
+        try {
+           flag = exporter(cpp_check_xml,message);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+
+        // 返回命令执行结果
+        return flag;
+    }
+
+    public boolean exporter(String path,String message) throws Exception {
+        File file = new File(path);
+        Document parse = parse(file);
+        Element rootElement = parse.getRootElement();
+        List<Element> errors = rootElement.element("errors").elements();
+        boolean flag=true;
+        for (int i = 0; i < errors.size(); i++) {
+            Element element = errors.get(i);
+            String msg = element.attribute("msg").getValue();
+
+            if (message.equals(msg))
+            {
+                flag=false;
+                break;
+            }
+        }
+
+
+        return flag;
+    }
+
+    public Document parse(File file) throws DocumentException {
+        SAXReader reader = new SAXReader();
+        return reader.read(file);
+    }
+
+
 
 
 
