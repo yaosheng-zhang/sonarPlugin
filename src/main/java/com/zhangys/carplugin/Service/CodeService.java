@@ -37,7 +37,7 @@ public class CodeService {
     public Boolean saveModifiedCode(String path, String code) {
        String filePath = CppMethodExtractor.dealPath(path);
         try {
-            PrintStream printStream = new PrintStream(path);
+            PrintStream printStream = new PrintStream(filePath);
             printStream.print(code);
             printStream.close();
         } catch (FileNotFoundException e) {
