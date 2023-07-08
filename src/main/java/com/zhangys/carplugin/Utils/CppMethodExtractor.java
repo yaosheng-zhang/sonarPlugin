@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.zhangys.carplugin.Entity.Constant.FIX_BASIS_ADR;
+
 @Data
 public class CppMethodExtractor {
 
@@ -32,8 +34,6 @@ public class CppMethodExtractor {
             lines = readCppFile(filePath);
             List<String> methodLines = extractMethod(lines, lineNumber);
 
-
-
             if (!methodLines.isEmpty()) {
                 for (String methodLine : methodLines) {
                     context.append(methodLine+"\n");
@@ -41,8 +41,12 @@ public class CppMethodExtractor {
 
             }
             else {
-
+//                List<String> surroundingLines = getSurroundingLines(filePath, lineNumber);
+//                for (String surroundingLine : surroundingLines) {
+//                    context.append(surroundingLine).append("\n");
+//                }
                 context.append(lines.get(lineNumber-1));
+
             }
 
 
@@ -53,7 +57,7 @@ public class CppMethodExtractor {
         return context.toString();
     }
 
-    public   List<String> readCppFile(String filePath) throws IOException {
+    public static List<String> readCppFile(String filePath) throws IOException {
         List<String> lines = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
@@ -124,6 +128,7 @@ public class CppMethodExtractor {
             return lines.subList(methodStart, methodEnd + 1);
         } else {
             // Otherwise, return an empty list
+
             return new ArrayList<>();
         }
     }
@@ -159,8 +164,11 @@ public class CppMethodExtractor {
     public   String getAcode(String path , Integer line) throws IOException {
         List<String> list = readCppFile(path);
         String s = list.get(line - 1);
+
+
         return s;
     }
+
 
     public Integer realLine(String content , String code ) throws Exception {
         String[] split = content.split("\n");
@@ -173,4 +181,44 @@ public class CppMethodExtractor {
         }
         throw new Exception("Code not found in list");
     }
+    public static String dealPath(String path)
+    {
+        String projectName = path.substring(0, path.indexOf(':'));
+        String  fileName= path.substring(path.indexOf(':')+1);
+        String adr = FIX_BASIS_ADR+projectName+'/'+fileName;
+//        String adr = FIX_BASIS_DEV_ADR+fileName;
+        System.out.println(adr);
+        return adr;
+    }
+//    public  List<String> getSurroundingLines(String filePath, int lineNumber) {
+//        List<String> lines = new ArrayList<>();
+//        List<String> resultLines = new ArrayList<>();
+//
+//        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+//            String line;
+//            while ((line = reader.readLine()) != null) {
+//                lines.add(line);
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        int totalLines = lines.size();
+//        int firstLine = Math.max(0, lineNumber - 6);
+//        int lastLine = Math.min(totalLines, lineNumber + 10);
+//
+//        if (lastLine - firstLine < 16) {
+//            if (firstLine == 0) {
+//                lastLine = Math.min(totalLines, lastLine + (16 - (lastLine - firstLine)));
+//            } else {
+//                firstLine = Math.max(0, firstLine - (16 - (lastLine - firstLine)));
+//            }
+//        }
+//
+//        for (int i = firstLine; i < lastLine; i++) {
+//            resultLines.add(lines.get(i));
+//        }
+//
+//        return resultLines;
+//    }
 }

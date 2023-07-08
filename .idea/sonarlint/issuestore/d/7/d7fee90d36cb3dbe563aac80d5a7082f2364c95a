@@ -1,0 +1,179 @@
+
+Z
+java:S11052"?Move this left curly brace to the end of previous line of code.(ÒÌâ–øÿÿÿÿ
+Z
+java:S11059"?Move this left curly brace to the end of previous line of code.(ÒÌâ–øÿÿÿÿ
+Z
+java:S1105m"?Move this left curly brace to the end of previous line of code.(ÒÌâ–øÿÿÿÿ
+[
+java:S1105Û"?Move this left curly brace to the end of previous line of code.(ÒÌâ–øÿÿÿÿ
+
+java:S1120!"wMake this line start after 2 spaces instead of 4 in order to indent the code consistently. (Indentation level is at 2.)(ôİñŞ
+
+java:S1120'"wMake this line start after 4 spaces instead of 8 in order to indent the code consistently. (Indentation level is at 2.)(ä¶Ëñ
+
+java:S11204"xMake this line start after 6 spaces instead of 12 in order to indent the code consistently. (Indentation level is at 2.)(Íµˆw
+“
+java:S1120:"xMake this line start after 8 spaces instead of 16 in order to indent the code consistently. (Indentation level is at 2.)(ÖÌ¨âÿÿÿÿÿ
+
+java:S1120R"wMake this line start after 4 spaces instead of 8 in order to indent the code consistently. (Indentation level is at 2.)(ü®¢
+“
+java:S1120W"xMake this line start after 6 spaces instead of 12 in order to indent the code consistently. (Indentation level is at 2.)(–†Š¶üÿÿÿÿ
+’
+java:S1120^"wMake this line start after 4 spaces instead of 8 in order to indent the code consistently. (Indentation level is at 2.)(ÔàÅÈşÿÿÿÿ
+’
+java:S1120n"wMake this line start after 4 spaces instead of 8 in order to indent the code consistently. (Indentation level is at 2.)( Ÿ°©ÿÿÿÿÿ
+“
+java:S1120€"wMake this line start after 4 spaces instead of 8 in order to indent the code consistently. (Indentation level is at 2.)(€òÛÉúÿÿÿÿ
+”
+java:S1120–"xMake this line start after 4 spaces instead of 12 in order to indent the code consistently. (Indentation level is at 2.)(ë•ç‘ùÿÿÿÿ
+
+java:S1120¡"wMake this line start after 4 spaces instead of 8 in order to indent the code consistently. (Indentation level is at 2.)(€ßÅŸ
+
+java:S1120§"wMake this line start after 4 spaces instead of 8 in order to indent the code consistently. (Indentation level is at 2.)(®ˆ–»
+”
+java:S1120À"xMake this line start after 6 spaces instead of 12 in order to indent the code consistently. (Indentation level is at 2.)(“Ï€—ûÿÿÿÿ
+”
+java:S1120Æ"xMake this line start after 6 spaces instead of 11 in order to indent the code consistently. (Indentation level is at 2.)(ÖáÖĞüÿÿÿÿ
+”
+java:S1120È"xMake this line start after 6 spaces instead of 12 in order to indent the code consistently. (Indentation level is at 2.)(Ò‚Òéüÿÿÿÿ
+“
+java:S1120Ñ"wMake this line start after 4 spaces instead of 8 in order to indent the code consistently. (Indentation level is at 2.)(€§¶‚üÿÿÿÿ
+
+java:S1120×"xMake this line start after 6 spaces instead of 12 in order to indent the code consistently. (Indentation level is at 2.)(Ç¯­ã
+”
+java:S1120Ü"xMake this line start after 8 spaces instead of 16 in order to indent the code consistently. (Indentation level is at 2.)(ÚÄ¦òøÿÿÿÿ
+
+java:S1120æ"wMake this line start after 4 spaces instead of 8 in order to indent the code consistently. (Indentation level is at 2.)(©›ï
+i	java:S109¼"SAssign this magic number 10 to a well-named constant, and use the constant instead.(áÎé›
+a	java:S112È"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
+\	java:S112Ğ"FDefine and throw a dedicated exception instead of using a generic one.(ô½ÄŸ
+l	java:S117¹"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÿ·³Ãıÿÿÿÿ
+z
+java:S1488_"_Immediately return this expression instead of assigning it to the temporary variable "resList".(ªÉôÍùÿÿÿÿ
+z
+java:S1488–"^Immediately return this expression instead of assigning it to the temporary variable "prompt".(ë•ç‘ùÿÿÿÿ
+x
+java:S1488¢"\Immediately return this expression instead of assigning it to the temporary variable "code".(ƒ·£œÿÿÿÿÿ
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÿ”œ–
+W
+java:S1106"AMove this left curly brace to the beginning of next line of code.(àî—ğ
+\
+java:S1106#"AMove this left curly brace to the beginning of next line of code.(´áÒ©ùÿÿÿÿ
+W
+java:S1106Q"AMove this left curly brace to the beginning of next line of code.(Ô‚Å
+\
+java:S1106V"AMove this left curly brace to the beginning of next line of code.(’åıÿÿÿÿ
+W
+java:S1106]"AMove this left curly brace to the beginning of next line of code.(ëŒãÛ
+\
+java:S1106|"AMove this left curly brace to the beginning of next line of code.(é¡ ¯ûÿÿÿÿ
+]
+java:S1106’"AMove this left curly brace to the beginning of next line of code.(”õ³¾üÿÿÿÿ
+X
+java:S1106 "AMove this left curly brace to the beginning of next line of code.(êß‹š
+W
+java:S1106¦"AMove this left curly brace to the beginning of next line of code.(î¿°
+X
+java:S1106¿"AMove this left curly brace to the beginning of next line of code.(Ö † 
+]
+java:S1106Å"AMove this left curly brace to the beginning of next line of code.(¡»¢üùÿÿÿÿ
+X
+java:S1106Ç"AMove this left curly brace to the beginning of next line of code.(”ı¾
+X
+java:S1106Ğ"AMove this left curly brace to the beginning of next line of code.(ô½ÄŸ
+]
+java:S1106Ö"AMove this left curly brace to the beginning of next line of code.(ŠÓ¶ìúÿÿÿÿ
+X
+java:S1106å"AMove this left curly brace to the beginning of next line of code.(½´”½
+^
+java:S22595"HA "NullPointerException" could be thrown; "fixRecords" is nullable here.(·ÕıÔ
+Y
+java:S2259¨"BA "NullPointerException" could be thrown; "byId" is nullable here.(Ù§·ì
+J
+java:S2755æ"3Disable access to external entities in XML parsing.(©›ï
+4
+java:S1451"&Add or update the header of this file.
+f	java:S103µ"KSplit this 184 characters long line (which is greater than 120 authorized).(ôú¿İùÿÿÿÿ
+C
+java:S2208".Explicitly import the specific classes needed.(¬›ãD
+^
+java:S1941,"CMove the declaration of "realLine" closer to the code that uses it.(£Úò¦ıÿÿÿÿ
+E
+java:S6212*"/Declare this local variable with "var" instead.(€ßÅŸ
+D
+java:S62124"/Declare this local variable with "var" instead.(Íµˆw
+N
+java:S42486"3Refactor this code to use a "static final" Pattern.(˜‚ìùÿÿÿÿ
+h
+java:S58676"MEnable the "UNICODE_CHARACTER_CLASS" flag or use a Unicode-aware alternative.(˜‚ìùÿÿÿÿ
+I
+java:S42487"3Refactor this code to use a "static final" Pattern.(õ­…ô
+c
+java:S58677"MEnable the "UNICODE_CHARACTER_CLASS" flag or use a Unicode-aware alternative.(õ­…ô
+N	java:S106="9Replace this use of System.out or System.err by a logger.(ù§é
+J
+java:S6212C"/Declare this local variable with "var" instead.(Í×å†şÿÿÿÿ
+J
+java:S6212F"/Declare this local variable with "var" instead.(ı¥ä¦ùÿÿÿÿ
+J
+java:S6212H"/Declare this local variable with "var" instead.(ãğÅÈüÿÿÿÿ
+J
+java:S6212U"/Declare this local variable with "var" instead.(³¿÷¿ıÿÿÿÿ
+Q	java:S125b"<This block of commented-out lines of code should be removed.(­¦¶
+J
+java:S6212n"/Declare this local variable with "var" instead.( Ÿ°©ÿÿÿÿÿ
+J
+java:S6212o"/Declare this local variable with "var" instead.(Œæä´şÿÿÿÿ
+S	java:S106r"9Replace this use of System.out or System.err by a logger.(’­ÿîüÿÿÿÿ
+V	java:S125q"<This block of commented-out lines of code should be removed.(»¬ØÈüÿÿÿÿ
+K
+java:S6212€"/Declare this local variable with "var" instead.(€òÛÉúÿÿÿÿ
+T	java:S106‚"9Replace this use of System.out or System.err by a logger.(¶Û¼Íøÿÿÿÿ
+T	java:S106„"9Replace this use of System.out or System.err by a logger.(µåë‚ùÿÿÿÿ
+F
+java:S6212¡"/Declare this local variable with "var" instead.(€ßÅŸ
+E
+java:S2047¦"/Rename this method to start with "is" or "has".(î¿°
+‘
+java:S1160¦"{Refactor this method to throw at most one checked exception instead of: java.lang.InterruptedException, java.io.IOException(î¿°
+K
+java:S6212«"/Declare this local variable with "var" instead.(Ë©ÍØùÿÿÿÿ
+F
+java:S6212¬"/Declare this local variable with "var" instead.(äÉŒŒ
+J
+java:S1943¬"3Remove this use of constructor "PrintStream(File)".(äÉŒŒ
+F
+java:S6212²"/Declare this local variable with "var" instead.(‘ÅÜÂ
+K
+java:S6212³"/Declare this local variable with "var" instead.(¹—øÿÿÿÿ
+O	java:S106¶"9Replace this use of System.out or System.err by a logger.(Ğıêõ
+W	java:S125µ"<This block of commented-out lines of code should be removed.(ôú¿İùÿÿÿÿ
+K
+java:S6212º"/Declare this local variable with "var" instead.(Åàùîøÿÿÿÿ
+F
+java:S6212¼"/Declare this local variable with "var" instead.(áÎé›
+F
+java:S6212½"/Declare this local variable with "var" instead.(¼éñÍ
+}
+java:S4174¾"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(áÖ€¯ıÿÿÿÿ8‡’ö’1
+R
+java:S6212¾"/Declare this local variable with "var" instead.(áÖ€¯ıÿÿÿÿ8‡’ö’1
+K
+java:S6212Ä"/Declare this local variable with "var" instead.(ŸÿáÑÿÿÿÿÿ
+I
+java:S1108Ç"2Move this "catch" keyword to a new dedicated line.(”ı¾
+K
+java:S6212Ñ"/Declare this local variable with "var" instead.(€§¶‚üÿÿÿÿ
+K
+java:S6212Ó"/Declare this local variable with "var" instead.(şÑíŠúÿÿÿÿ
+F
+java:S6212Õ"/Declare this local variable with "var" instead.(Ö°š·
+K
+java:S6212Ö"/Declare this local variable with "var" instead.(ŠÓ¶ìúÿÿÿÿ
+F
+java:S6212×"/Declare this local variable with "var" instead.(Ç¯­ã
+F
+java:S6212æ"/Declare this local variable with "var" instead.(©›ï
+É
+java:S4605"²'IssueService' is not reachable by @ComponentScan or @SpringBootApplication. Either move it to a package configured in @ComponentScan or update your @ComponentScan configuration.(àî—ğ

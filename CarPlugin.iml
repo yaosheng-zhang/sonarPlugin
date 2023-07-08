@@ -159,7 +159,7 @@
     <orderEntry type="library" name="Maven: com.zaxxer:HikariCP:3.4.5" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-jdbc:5.2.15.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: io.github.java-diff-utils:java-diff-utils:4.11" level="project" />
-    <orderEntry type="library" name="Maven: org.antlr:antlr4-runtime:4.9.3" level="project" />
+    <orderEntry type="library" name="Maven: org.antlr:antlr4-runtime:4.5.1" level="project" />
     <orderEntry type="library" name="Maven: org.dom4j:dom4j:2.1.1" level="project" />
   </component>
 </module>

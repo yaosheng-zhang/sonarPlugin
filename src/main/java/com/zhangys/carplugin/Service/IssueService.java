@@ -1,5 +1,5 @@
 package com.zhangys.carplugin.Service;
-import com.zhangys.carplugin.Entity.FixRecords;
+import com.zhangys.carplugin.Entity.Po.FixRecords;
 import com.zhangys.carplugin.Entity.Issue;
 import com.zhangys.carplugin.Utils.CppMethodExtractor;
 import com.zhangys.carplugin.Utils.DiffHandleUtils;
@@ -11,7 +11,6 @@ import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -106,12 +105,12 @@ public class IssueService {
      * @param path
      * @return
      */
-    public String dealPath(String path)
+    public  String dealPath(String path)
     {
         String projectName = path.substring(0, path.indexOf(':'));
         String  fileName= path.substring(path.indexOf(':')+1);
-//        String adr = FIX_BASIS_ADR+projectName+'/'+fileName;
-        String adr = FIX_BASIS_DEV_ADR+fileName;
+        String adr = FIX_BASIS_ADR+projectName+'/'+fileName;
+//        String adr = FIX_BASIS_DEV_ADR+fileName;
         System.out.println(adr);
         return adr;
     }

@@ -43,6 +43,8 @@ public class IssueController {
         return issueService.getJudgeInfo(id);
     }
 
+
+
 //    @PostMapping(value = "/info",consumes = "application/json")
 //    @ApiOperation(value = "获取问题类别")
 //    public Error getIssue(@RequestBody Issue issue){

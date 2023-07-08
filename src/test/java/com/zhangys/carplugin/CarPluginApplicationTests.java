@@ -21,32 +21,32 @@ import java.util.List;
 class CarPluginApplicationTests {
 
 
-            @Test
-            void testGPT(){
-                Generator generator = new Generator();
-                String content ="static void misra_2_2(int x) {\n" +
-                        "    int a;\n" +
-                        "    a = x + 0; // 2.2\n" +
-                        "    a = 0 + x; // 2.2\n" +
-                        "    a = x * 0; // 2.2\n" +
-                        "    a = 0 * x; // 2.2\n" +
-                        "    a = x * 1; // 2.2\n" +
-                        "    a = 1 * x; // 2.2\n" +
-                        "    a = MISRA_2_2;\n" +
-                        "    (void)a;\n" +
-                        "}";
-
-                //认不到代码行数
-                Integer line = 5;
-                String msg = "Rule Required 2.2: There shall be no dead code.";
-                String prompt = "你的任务是根据MISRA的要求和规范对下面代码中指定代码行进行重构，若满足规范则直接返回\n代码如下：\n"+content+"\n"
-                        +"出现问题的行数为："+line+"\t   a = x * 0; "+"\n违反的Misra规则为:"+msg+
-                        "\n只需要重构给定代码的第"+line+"行代码并且返回重构后的整体代码，非代码部分必须以JAVA注释 // 的方式出现"
-                        ;
-                System.out.println(prompt);
-                String codeFromModle = generator.getCodeFromModle(prompt, apiLists);
-                System.out.println(codeFromModle);
-            }
+//            @Test
+//            void testGPT(){
+//                Generator generator = new Generator();
+//                String content ="static void misra_2_2(int x) {\n" +
+//                        "    int a;\n" +
+//                        "    a = x + 0; // 2.2\n" +
+//                        "    a = 0 + x; // 2.2\n" +
+//                        "    a = x * 0; // 2.2\n" +
+//                        "    a = 0 * x; // 2.2\n" +
+//                        "    a = x * 1; // 2.2\n" +
+//                        "    a = 1 * x; // 2.2\n" +
+//                        "    a = MISRA_2_2;\n" +
+//                        "    (void)a;\n" +
+//                        "}";
+//
+//                //认不到代码行数
+//                Integer line = 5;
+//                String msg = "Rule Required 2.2: There shall be no dead code.";
+//                String prompt = "你的任务是根据MISRA的要求和规范对下面代码中指定代码行进行重构，若满足规范则直接返回\n代码如下：\n"+content+"\n"
+//                        +"出现问题的行数为："+line+"\t   a = x * 0; "+"\n违反的Misra规则为:"+msg+
+//                        "\n只需要重构给定代码的第"+line+"行代码并且返回重构后的整体代码，非代码部分必须以JAVA注释 // 的方式出现"
+//                        ;
+//                System.out.println(prompt);
+//                String codeFromModle = generator.getCodeFromModle(prompt, apiLists);
+//                System.out.println(codeFromModle);
+//            }
             @Resource
     IssueService issueService;
 
@@ -97,5 +97,10 @@ class CarPluginApplicationTests {
              System.out.println(allKeys);
 
          }
+
+     @Test
+    void test_antlr_func(){
+             
+     }
 
 }

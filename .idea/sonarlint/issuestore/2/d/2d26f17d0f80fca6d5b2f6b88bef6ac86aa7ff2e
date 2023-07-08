@@ -1,0 +1,22 @@
+
+
+java:S1120"wMake this line start after 2 spaces instead of 4 in order to indent the code consistently. (Indentation level is at 2.)(„¤Ïƒ
+
+java:S1120"wMake this line start after 4 spaces instead of 8 in order to indent the code consistently. (Indentation level is at 2.)(Óƒ®û
+|
+java:S1488"fImmediately return this expression instead of assigning it to the temporary variable "responseEntity".(Óƒ®û
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÿ”œ–
+\
+java:S1106
+"AMove this left curly brace to the beginning of next line of code.(Îêˆøÿÿÿÿ
+\
+java:S1106"AMove this left curly brace to the beginning of next line of code.(¯Ïõ ûÿÿÿÿ
+4
+java:S1451"&Add or update the header of this file.
+S
+java:S4288"=Remove this annotation and use constructor injection instead.(êæÄŞ
+_
+java:S1128"DRemove this unused import 'org.springframework.http.ResponseEntity'.(¶¯ø¦úÿÿÿÿ
+Ù
+java:S4605
+"½'RestTemplateToInterface' is not reachable by @ComponentScan or @SpringBootApplication. Either move it to a package configured in @ComponentScan or update your @ComponentScan configuration.(Îêˆøÿÿÿÿ

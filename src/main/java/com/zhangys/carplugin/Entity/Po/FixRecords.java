@@ -1,4 +1,4 @@
-package com.zhangys.carplugin.Entity;
+package com.zhangys.carplugin.Entity.Po;
 
 
 import lombok.AllArgsConstructor;
